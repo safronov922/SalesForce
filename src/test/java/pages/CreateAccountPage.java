@@ -1,6 +1,8 @@
 package pages;
 
 import models.SalesForceAccountModel;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import salesforceelement.DropDawnList;
@@ -9,6 +11,7 @@ import salesforceelement.TextArea;
 
 
 public class CreateAccountPage extends BasePage {
+    private static final Logger LOGGER = LogManager.getLogger(CreateAccountPage.class.getName());
     private By SEARCH_INPUT = By.xpath("//article[contains(., 'New Account')]//label[contains(., 'Account Name')]/following-sibling::div//input");
     private By SAVE_BUTTON = By.xpath("//button[@title='Save']");
     private By SUCCESS_MESSAGE = By.xpath("//div[@data-key='success']//span[text()='Account']");
@@ -19,6 +22,7 @@ public class CreateAccountPage extends BasePage {
 
     public void saveNewAccountForm(SalesForceAccountModel accountModel) {
         driver.findElement(SEARCH_INPUT).sendKeys(accountModel.getAccountName());
+        LOGGER.trace("Fill in all fields");
         new InputField(driver, "Phone").inputText(accountModel.getPhone());
         new InputField(driver, "Fax").inputText(accountModel.getFax());
         new InputField(driver, "Website").inputText(accountModel.getWebSite());
@@ -37,6 +41,7 @@ public class CreateAccountPage extends BasePage {
         new InputField(driver, "Billing Country").inputText(accountModel.getBillingCountry());
         new InputField(driver, "Shipping Zip/Postal Code").inputText(accountModel.getShippingZip());
         new InputField(driver, "Shipping Country").inputText(accountModel.getShippingCountry());
+        LOGGER.trace("Clicking Save on creating form");
         driver.findElement(SAVE_BUTTON).click();
     }
 
