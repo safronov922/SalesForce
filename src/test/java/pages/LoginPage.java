@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
@@ -17,11 +18,11 @@ public class LoginPage extends BasePage {
     public LoginPage(WebDriver driver) {
         super(driver);
     }
-
+    @Step("Open '{WebUrls.SALEFORCE_URL}' url")
     public void openPage() {
         driver.get(WebUrls.SALEFORCE_URL);
     }
-
+    @Step("Login to SaleForce")
     public void login(String username, String password) {
         LOGGER.trace("Fill in username and password");
         driver.findElement(USERNAME_INPUT).sendKeys(username);

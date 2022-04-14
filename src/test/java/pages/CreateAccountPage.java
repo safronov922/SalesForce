@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.SalesForceAccountModel;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -19,7 +20,7 @@ public class CreateAccountPage extends BasePage {
     public CreateAccountPage(WebDriver driver) {
         super(driver);
     }
-
+    @Step("Putting data in all fields in New Account modal window")
     public void saveNewAccountForm(SalesForceAccountModel accountModel) {
         driver.findElement(SEARCH_INPUT).sendKeys(accountModel.getAccountName());
         LOGGER.trace("Fill in all fields");
@@ -44,7 +45,7 @@ public class CreateAccountPage extends BasePage {
         LOGGER.trace("Clicking Save on creating form");
         driver.findElement(SAVE_BUTTON).click();
     }
-
+    @Step("Checking that account created")
     public boolean displaedSuccessMessage() {
         return driver.findElement(SUCCESS_MESSAGE).isDisplayed();
     }
